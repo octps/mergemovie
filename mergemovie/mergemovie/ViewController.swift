@@ -4,7 +4,6 @@
 //
 //  Created by s001 on 2015/05/07.
 //  Copyright (c) 2015年 s001. All rights reserved.
-// http://sssslide.com/www.slideshare.net/himaratsu/6-vine
 
 import UIKit
 import AVFoundation
@@ -14,6 +13,10 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    
+    @IBAction func mergeButton(sender: AnyObject) {
         self.movieMerge()
     }
     
@@ -52,7 +55,7 @@ class ViewController: UIViewController {
         //            .CachesDirectory,
         //            .UserDomainMask, true)
         
-        let completeMovie = outputPath[0].stringByAppendingPathComponent("movie9.mov")
+        let completeMovie = outputPath[0].stringByAppendingPathComponent("movie0.mov")
         let completeMovieUrl = NSURL(fileURLWithPath: completeMovie)
         
         exporter.outputURL = completeMovieUrl
