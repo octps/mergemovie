@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>89FCF065-1E3B-4F40-B5BA-EBF1AD3919C0</string>
+	<key>IDESourceControlProjectName</key>
+	<string>mergemovie</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>85EAD6492ADF36C321CAF236523C4648D03DD2D1</key>
+		<string>github.com:octps/mergemovie.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>mergemovie/mergemovie.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>85EAD6492ADF36C321CAF236523C4648D03DD2D1</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:octps/mergemovie.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>85EAD6492ADF36C321CAF236523C4648D03DD2D1</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>85EAD6492ADF36C321CAF236523C4648D03DD2D1</string>
+			<key>IDESourceControlWCCName</key>
+			<string>mergemovie</string>
+		</dict>
+	</array>
+</dict>
+</plist>

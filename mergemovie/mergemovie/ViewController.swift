@@ -45,19 +45,25 @@ class ViewController: UIViewController {
         var videoComposition: AVMutableVideoComposition = AVMutableVideoComposition()
         
         
-        //        let outputPath = NSTemporaryDirectory()
+        let outputPath = NSTemporaryDirectory()
         
-        let outputPath = NSSearchPathForDirectoriesInDomains(
-            .DocumentDirectory,
-            .UserDomainMask, true)
+//        let outputPath = NSSearchPathForDirectoriesInDomains(
+//            .DocumentDirectory,
+//            .UserDomainMask, true)
         
         //        let outputPath = NSSearchPathForDirectoriesInDomains(
         //            .CachesDirectory,
         //            .UserDomainMask, true)
         
-        let completeMovie = outputPath[0].stringByAppendingPathComponent("movie0.mov")
+//        let completeMovie = outputPath[0].stringByAppendingPathComponent("movie0.mov")
+        let completeMovie = outputPath.stringByAppendingPathComponent("movie.mov")
         let completeMovieUrl = NSURL(fileURLWithPath: completeMovie)
-        
+
+//        if ([[NSFileManager defaultManager] fileExistsAtPath:exportPath])
+        if (NSFileManager.defaultManager().fileExistsAtPath(completeMovie)) {
+            NSFileManager.defaultManager().removeItemAtPath(completeMovie, error: nil)
+        }
+
         exporter.outputURL = completeMovieUrl
         exporter.outputFileType = AVFileTypeMPEG4
         exporter.exportAsynchronouslyWithCompletionHandler({
