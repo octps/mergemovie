@@ -12,8 +12,26 @@ import MobileCoreServices
 
 class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     
+    var playerItem : AVPlayerItem!
+    var videoPlayer : AVPlayer!
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let defaultpath = NSBundle.mainBundle().pathForResource("sample", ofType: "mp4")
+        let fileURL = NSURL(fileURLWithPath: defaultpath!)
+        let avAsset = AVURLAsset(URL: fileURL, options: nil)
+        
+        playerItem = AVPlayerItem(asset: avAsset)
+        videoPlayer = AVPlayer(playerItem: playerItem)
+        var videoPlayerView = AVPlayerView(frame: self.view.bounds)
+        
+        var layer = videoPlayerView.layer as AVPlayerLayer
+        layer.videoGravity = AVLayerVideoGravityResizeAspect
+        layer.player = videoPlayer
+        
+        self.view.layer.addSublayer(layer)
+
     }
         
     @IBAction func mergeButton(sender: AnyObject) {
@@ -38,14 +56,13 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         }
     }
     
+    // 動画の表示
     func showMovie(movieUrl:NSURL) {
         var fileURL = movieUrl
         var avAsset = AVURLAsset(URL: fileURL, options: nil)
         
-//        var playerItem : AVPlayerItem!
-//        var videoPlayer : AVPlayer!
-        var playerItem : AVPlayerItem = AVPlayerItem(asset: avAsset)
-        var videoPlayer : AVPlayer! = AVPlayer(playerItem: playerItem)
+        playerItem = AVPlayerItem(asset: avAsset)
+        videoPlayer = AVPlayer(playerItem: playerItem)
         var videoPlayerView = AVPlayerView(frame: self.view.bounds)
         
         var layer = videoPlayerView.layer as AVPlayerLayer
@@ -55,6 +72,12 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         self.view.layer.addSublayer(layer)
     }
 
+    // 動画の再生
+    @IBAction func playMovie(sender: AnyObject) {
+        videoPlayer.seekToTime(CMTimeMakeWithSeconds(0, Int32(NSEC_PER_SEC)))
+        videoPlayer.play()
+    }
+    
     // カメラロールから選択後、選択した動画のurlを取得、showMovieにurlを渡す
     func imagePickerController(picker: UIImagePickerController!, didFinishPickingMediaWithInfo info: NSDictionary!) {
         var url = info[UIImagePickerControllerMediaURL] as NSURL!
