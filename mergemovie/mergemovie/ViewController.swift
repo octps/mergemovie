@@ -8,16 +8,33 @@
 import UIKit
 import AVFoundation
 import AssetsLibrary
+import MobileCoreServices
 
-class ViewController: UIViewController {
+class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
-    
+        
     @IBAction func mergeButton(sender: AnyObject) {
         self.movieMerge()
+    }
+    
+    @IBAction func movieSelect(sender: AnyObject) {
+        self.movieSelct()
+    }
+    
+    func movieSelct() {
+        if !UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) {
+            UIAlertView(title: "警告", message: "Photoライブラリにアクセス出来ません", delegate: nil, cancelButtonTitle: "OK").show()
+        } else {
+            var imagePickerController = UIImagePickerController()
+            imagePickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+            imagePickerController.mediaTypes = NSArray(object: kUTTypeMovie)
+            imagePickerController.allowsEditing = false
+            imagePickerController.delegate = self
+            self.presentViewController(imagePickerController,animated:true ,completion:nil)
+        }
     }
     
     func movieMerge() {
@@ -47,19 +64,9 @@ class ViewController: UIViewController {
         
         let outputPath = NSTemporaryDirectory()
         
-//        let outputPath = NSSearchPathForDirectoriesInDomains(
-//            .DocumentDirectory,
-//            .UserDomainMask, true)
-        
-        //        let outputPath = NSSearchPathForDirectoriesInDomains(
-        //            .CachesDirectory,
-        //            .UserDomainMask, true)
-        
-//        let completeMovie = outputPath[0].stringByAppendingPathComponent("movie0.mov")
         let completeMovie = outputPath.stringByAppendingPathComponent("movie.mov")
         let completeMovieUrl = NSURL(fileURLWithPath: completeMovie)
 
-//        if ([[NSFileManager defaultManager] fileExistsAtPath:exportPath])
         if (NSFileManager.defaultManager().fileExistsAtPath(completeMovie)) {
             NSFileManager.defaultManager().removeItemAtPath(completeMovie, error: nil)
         }
@@ -78,8 +85,6 @@ class ViewController: UIViewController {
                 assetsLib.writeVideoAtPathToSavedPhotosAlbum(exporter.outputURL, completionBlock: {
                     (nsurl, error) -> Void in
                 })
-                //                削除機能
-                //                NSFileManager.defaultManager().removeItemAtPath(completeMovie, error: nil)
                 
             }
         })
