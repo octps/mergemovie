@@ -24,6 +24,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         self.movieSelct()
     }
     
+    //　カメラロールから動画の選択
     func movieSelct() {
         if !UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) {
             UIAlertView(title: "警告", message: "Photoライブラリにアクセス出来ません", delegate: nil, cancelButtonTitle: "OK").show()
@@ -36,6 +37,33 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
             self.presentViewController(imagePickerController,animated:true ,completion:nil)
         }
     }
+    
+    func showMovie(movieUrl:NSURL) {
+        var fileURL = movieUrl
+        var avAsset = AVURLAsset(URL: fileURL, options: nil)
+        
+//        var playerItem : AVPlayerItem!
+//        var videoPlayer : AVPlayer!
+        var playerItem : AVPlayerItem = AVPlayerItem(asset: avAsset)
+        var videoPlayer : AVPlayer! = AVPlayer(playerItem: playerItem)
+        var videoPlayerView = AVPlayerView(frame: self.view.bounds)
+        
+        var layer = videoPlayerView.layer as AVPlayerLayer
+        layer.videoGravity = AVLayerVideoGravityResizeAspect
+        layer.player = videoPlayer
+        
+        self.view.layer.addSublayer(layer)
+    }
+
+    // カメラロールから選択後、選択した動画のurlを取得、showMovieにurlを渡す
+    func imagePickerController(picker: UIImagePickerController!, didFinishPickingMediaWithInfo info: NSDictionary!) {
+        var url = info[UIImagePickerControllerMediaURL] as NSURL!
+        var pickedURL:NSURL = info[UIImagePickerControllerReferenceURL] as NSURL
+        self.dismissViewControllerAnimated(true, completion: nil)
+        showMovie(pickedURL)
+    }
+    
+    
     
     func movieMerge() {
         var composition = AVMutableComposition()
@@ -95,5 +123,20 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         // Dispose of any resources that can be recreated.
     }
     
-    
+    // レイヤーをAVPlayerLayerにする為のラッパークラス.
+    class AVPlayerView : UIView{
+        
+        required init(coder aDecoder: NSCoder) {
+            super.init(coder: aDecoder)
+        }
+        
+        override init(frame: CGRect) {
+            super.init(frame: frame)
+        }
+        
+        override class func layerClass() -> AnyClass{
+            return AVPlayerLayer.self
+        }
+        
+    }
 }
