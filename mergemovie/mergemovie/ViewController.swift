@@ -12,8 +12,27 @@ import MobileCoreServices
 
 class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     
+    var playerItem : AVPlayerItem!
+    var videoPlayer : AVPlayer!
+    var myLayer : AVPlayerLayer!
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let defaultpath = NSBundle.mainBundle().pathForResource("sample", ofType: "mp4")
+        let fileURL = NSURL(fileURLWithPath: defaultpath!)
+        let avAsset = AVURLAsset(URL: fileURL, options: nil)
+        
+        playerItem = AVPlayerItem(asset: avAsset)
+        videoPlayer = AVPlayer(playerItem: playerItem)
+        var videoPlayerView = AVPlayerView(frame: self.view.bounds)
+        
+        myLayer = videoPlayerView.layer as AVPlayerLayer
+        myLayer.videoGravity = AVLayerVideoGravityResizeAspect
+        myLayer.player = videoPlayer
+        
+        self.view.layer.addSublayer(myLayer)
+
     }
         
     @IBAction func mergeButton(sender: AnyObject) {
@@ -24,6 +43,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         self.movieSelct()
     }
     
+    //　カメラロールから動画の選択
     func movieSelct() {
         if !UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) {
             UIAlertView(title: "警告", message: "Photoライブラリにアクセス出来ません", delegate: nil, cancelButtonTitle: "OK").show()
@@ -36,6 +56,41 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
             self.presentViewController(imagePickerController,animated:true ,completion:nil)
         }
     }
+    
+    // 動画の表示
+    func showMovie(movieUrl:NSURL) {
+        videoPlayer.pause()
+        myLayer.removeFromSuperlayer()
+        
+        var fileURL = movieUrl
+        var avAsset = AVURLAsset(URL: fileURL, options: nil)
+        
+        playerItem = AVPlayerItem(asset: avAsset)
+        videoPlayer = AVPlayer(playerItem: playerItem)
+        var videoPlayerView = AVPlayerView(frame: self.view.bounds)
+        
+        myLayer = videoPlayerView.layer as AVPlayerLayer
+        myLayer.videoGravity = AVLayerVideoGravityResizeAspect
+        myLayer.player = videoPlayer
+        
+        self.view.layer.addSublayer(myLayer)
+    }
+
+    // 動画の再生
+    @IBAction func playMovie(sender: AnyObject) {
+        videoPlayer.seekToTime(CMTimeMakeWithSeconds(0, Int32(NSEC_PER_SEC)))
+        videoPlayer.play()
+    }
+    
+    // カメラロールから選択後、選択した動画のurlを取得、showMovieにurlを渡す
+    func imagePickerController(picker: UIImagePickerController!, didFinishPickingMediaWithInfo info: NSDictionary!) {
+        var url = info[UIImagePickerControllerMediaURL] as NSURL!
+        var pickedURL:NSURL = info[UIImagePickerControllerReferenceURL] as NSURL
+        self.dismissViewControllerAnimated(true, completion: nil)
+        showMovie(pickedURL)
+    }
+    
+    
     
     func movieMerge() {
         var composition = AVMutableComposition()
@@ -95,5 +150,20 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         // Dispose of any resources that can be recreated.
     }
     
-    
+    // レイヤーをAVPlayerLayerにする為のラッパークラス.
+    class AVPlayerView : UIView{
+        
+        required init(coder aDecoder: NSCoder) {
+            super.init(coder: aDecoder)
+        }
+        
+        override init(frame: CGRect) {
+            super.init(frame: frame)
+        }
+        
+        override class func layerClass() -> AnyClass{
+            return AVPlayerLayer.self
+        }
+        
+    }
 }
