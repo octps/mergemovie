@@ -14,23 +14,24 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     
     var playerItem : AVPlayerItem!
     var videoPlayer : AVPlayer!
+    var myLayer : AVPlayerLayer!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let defaultpath = NSBundle.mainBundle().pathForResource("sample", ofType: "mp4")
-//        let fileURL = NSURL(fileURLWithPath: defaultpath!)
-//        let avAsset = AVURLAsset(URL: fileURL, options: nil)
-//        
-//        playerItem = AVPlayerItem(asset: avAsset)
-//        videoPlayer = AVPlayer(playerItem: playerItem)
-//        var videoPlayerView = AVPlayerView(frame: self.view.bounds)
-//        
-//        var layer = videoPlayerView.layer as AVPlayerLayer
-//        layer.videoGravity = AVLayerVideoGravityResizeAspect
-//        layer.player = videoPlayer
-//        
-//        self.view.layer.addSublayer(layer)
+        let defaultpath = NSBundle.mainBundle().pathForResource("sample", ofType: "mp4")
+        let fileURL = NSURL(fileURLWithPath: defaultpath!)
+        let avAsset = AVURLAsset(URL: fileURL, options: nil)
+        
+        playerItem = AVPlayerItem(asset: avAsset)
+        videoPlayer = AVPlayer(playerItem: playerItem)
+        var videoPlayerView = AVPlayerView(frame: self.view.bounds)
+        
+        myLayer = videoPlayerView.layer as AVPlayerLayer
+        myLayer.videoGravity = AVLayerVideoGravityResizeAspect
+        myLayer.player = videoPlayer
+        
+        self.view.layer.addSublayer(myLayer)
 
     }
         
@@ -58,6 +59,8 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     
     // 動画の表示
     func showMovie(movieUrl:NSURL) {
+        videoPlayer.pause()
+        myLayer.removeFromSuperlayer()
         
         var fileURL = movieUrl
         var avAsset = AVURLAsset(URL: fileURL, options: nil)
@@ -65,12 +68,12 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         playerItem = AVPlayerItem(asset: avAsset)
         videoPlayer = AVPlayer(playerItem: playerItem)
         var videoPlayerView = AVPlayerView(frame: self.view.bounds)
-//        
-//        var layer = videoPlayerView.layer as AVPlayerLayer
-//        layer.videoGravity = AVLayerVideoGravityResizeAspect
-//        layer.player = videoPlayer
-//        
-//        self.view.layer.addSublayer(layer)
+        
+        myLayer = videoPlayerView.layer as AVPlayerLayer
+        myLayer.videoGravity = AVLayerVideoGravityResizeAspect
+        myLayer.player = videoPlayer
+        
+        self.view.layer.addSublayer(myLayer)
     }
 
     // 動画の再生
