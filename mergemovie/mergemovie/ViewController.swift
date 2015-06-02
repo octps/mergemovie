@@ -36,8 +36,21 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         
         self.view.layer.addSublayer(myLayer)
 
-    }
+        /* 動画の終了を監視 */
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerDidPlayToEndTime:",
+            name: AVPlayerItemDidPlayToEndTimeNotification,
+            object: self.playerItem)
         
+    }
+    
+    /* 動画終了時のメソッド */
+    func playerDidPlayToEndTime(notification: NSNotification) {
+        var duration = CMTimeGetSeconds(self.videoPlayer.currentItem.duration)
+        clipEndTime = duration;
+        // 通知があったらnotificationを削除.
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+
     @IBAction func mergeButton(sender: AnyObject) {
         self.movieMerge()
     }
@@ -50,7 +63,6 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     @IBAction func clipStart(sender: AnyObject) {
         if (videoPlayer.rate > 0) {
             clipStartTime = CMTimeGetSeconds(self.videoPlayer.currentTime())
-            println(clipStartTime)
         }
     }
 
@@ -61,7 +73,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         }
     }
     
-    
+
     //　カメラロールから動画の選択
     func movieSelct() {
         if !UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) {
@@ -99,6 +111,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     @IBAction func playMovie(sender: AnyObject) {
         videoPlayer.seekToTime(CMTimeMakeWithSeconds(0, Int32(NSEC_PER_SEC)))
         videoPlayer.play()
+//        startFlag = 1;
     }
     
     // カメラロールから選択後、選択した動画のurlを取得、showMovieにurlを渡す
