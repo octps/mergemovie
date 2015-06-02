@@ -15,6 +15,9 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     var playerItem : AVPlayerItem!
     var videoPlayer : AVPlayer!
     var myLayer : AVPlayerLayer!
+    
+    var clipStartTime:Float64!
+    var clipEndTime:Float64!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +45,22 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     @IBAction func movieSelect(sender: AnyObject) {
         self.movieSelct()
     }
+    
+    /* clip end time */
+    @IBAction func clipStart(sender: AnyObject) {
+        if (videoPlayer.rate > 0) {
+            clipStartTime = CMTimeGetSeconds(self.videoPlayer.currentTime())
+            println(clipStartTime)
+        }
+    }
+
+    /* clip end time */
+    @IBAction func clipEnd(sender: AnyObject) {
+        if (videoPlayer.rate > 0) {
+            clipEndTime = CMTimeGetSeconds(self.videoPlayer.currentTime())
+        }
+    }
+    
     
     //　カメラロールから動画の選択
     func movieSelct() {

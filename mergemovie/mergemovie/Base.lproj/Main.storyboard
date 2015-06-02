@@ -44,15 +44,27 @@
                                     <action selector="playMovie:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="MDL-2e-fiu"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dYG-X2-xjd">
+                                <rect key="frame" x="285" y="465" width="30" height="30"/>
+                                <state key="normal" title="clip">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="clipEnd:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="w9u-De-GcX"/>
+                                    <action selector="clipStart:" destination="vXZ-lx-hvc" eventType="touchDown" id="Wk1-Qk-2Kz"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="ssi-DN-43J" secondAttribute="centerX" id="2rN-A8-0No"/>
                             <constraint firstItem="EZw-Bs-w9I" firstAttribute="top" secondItem="FhH-mU-SpQ" secondAttribute="bottom" constant="25" id="3U9-Hf-fqm"/>
                             <constraint firstAttribute="centerX" secondItem="FhH-mU-SpQ" secondAttribute="centerX" id="3vG-W2-xfK"/>
+                            <constraint firstAttribute="centerX" secondItem="dYG-X2-xjd" secondAttribute="centerX" id="PSE-Tw-SPX"/>
                             <constraint firstItem="phr-6A-as4" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" constant="30" id="Q6q-KG-yPD"/>
                             <constraint firstItem="FhH-mU-SpQ" firstAttribute="top" secondItem="ssi-DN-43J" secondAttribute="bottom" constant="10" id="dMB-2y-aeP"/>
                             <constraint firstAttribute="centerX" secondItem="phr-6A-as4" secondAttribute="centerX" id="fhZ-fD-2xn"/>
+                            <constraint firstItem="ssi-DN-43J" firstAttribute="top" secondItem="dYG-X2-xjd" secondAttribute="bottom" constant="10" id="nJO-24-1r6"/>
                         </constraints>
                     </view>
                 </viewController>
