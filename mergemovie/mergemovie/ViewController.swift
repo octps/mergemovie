@@ -36,10 +36,6 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         
         self.view.layer.addSublayer(myLayer)
 
-        /* 動画の終了を監視 */
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerDidPlayToEndTime:",
-            name: AVPlayerItemDidPlayToEndTimeNotification,
-            object: self.playerItem)
         
     }
     
@@ -48,7 +44,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         var duration = CMTimeGetSeconds(self.videoPlayer.currentItem.duration)
         clipEndTime = duration;
         // 通知があったらnotificationを削除.
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        startMovie()
     }
 
     @IBAction func mergeButton(sender: AnyObject) {
@@ -109,11 +105,19 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
 
     // 動画の再生
     @IBAction func playMovie(sender: AnyObject) {
+        startMovie()
+    }
+
+    func startMovie() {
+        /* 動画の終了を監視 */
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerDidPlayToEndTime:",
+            name: AVPlayerItemDidPlayToEndTimeNotification,
+            object: self.playerItem)
+
         videoPlayer.seekToTime(CMTimeMakeWithSeconds(0, Int32(NSEC_PER_SEC)))
         videoPlayer.play()
-//        startFlag = 1;
     }
-    
+
     // カメラロールから選択後、選択した動画のurlを取得、showMovieにurlを渡す
     func imagePickerController(picker: UIImagePickerController!, didFinishPickingMediaWithInfo info: NSDictionary!) {
         var url = info[UIImagePickerControllerMediaURL] as NSURL!
