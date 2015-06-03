@@ -107,7 +107,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     @IBAction func playMovie(sender: AnyObject) {
         startMovie()
     }
-
+    
     func startMovie() {
         /* 動画の終了を監視 */
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerDidPlayToEndTime:",
@@ -116,6 +116,15 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
 
         videoPlayer.seekToTime(CMTimeMakeWithSeconds(0, Int32(NSEC_PER_SEC)))
         videoPlayer.play()
+    }
+
+    @IBAction func stopMovies(sender: AnyObject) {
+        stopMovie()
+    }
+    
+    func stopMovie() {
+        videoPlayer.seekToTime(CMTimeMakeWithSeconds(0, Int32(NSEC_PER_SEC)))
+        videoPlayer.pause()
     }
 
     // カメラロールから選択後、選択した動画のurlを取得、showMovieにurlを渡す

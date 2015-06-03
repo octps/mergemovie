@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -18,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="phr-6A-as4">
-                                <rect key="frame" x="280" y="30" width="41" height="30"/>
+                                <rect key="frame" x="280" y="40" width="41" height="30"/>
                                 <state key="normal" title="select">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -27,7 +26,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FhH-mU-SpQ">
-                                <rect key="frame" x="278" y="545" width="43" height="30"/>
+                                <rect key="frame" x="278" y="540" width="43" height="30"/>
                                 <state key="normal" title="merge">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -35,17 +34,8 @@
                                     <action selector="mergeButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="nSJ-Ph-JQl"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ssi-DN-43J">
-                                <rect key="frame" x="285" y="505" width="30" height="30"/>
-                                <state key="normal" title="play">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="playMovie:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="MDL-2e-fiu"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dYG-X2-xjd">
-                                <rect key="frame" x="285" y="465" width="30" height="30"/>
+                                <rect key="frame" x="285" y="480" width="30" height="30"/>
                                 <state key="normal" title="clip">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -54,17 +44,37 @@
                                     <action selector="clipStart:" destination="vXZ-lx-hvc" eventType="touchDown" id="Wk1-Qk-2Kz"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rfo-pI-gOV">
+                                <rect key="frame" x="284" y="500" width="31" height="30"/>
+                                <state key="normal" title="stop">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="stopMovies:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="U75-dA-ckE"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ssi-DN-43J">
+                                <rect key="frame" x="285" y="520" width="30" height="30"/>
+                                <state key="normal" title="play">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="playMovie:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="MDL-2e-fiu"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="ssi-DN-43J" secondAttribute="centerX" id="2rN-A8-0No"/>
-                            <constraint firstItem="EZw-Bs-w9I" firstAttribute="top" secondItem="FhH-mU-SpQ" secondAttribute="bottom" constant="25" id="3U9-Hf-fqm"/>
                             <constraint firstAttribute="centerX" secondItem="FhH-mU-SpQ" secondAttribute="centerX" id="3vG-W2-xfK"/>
+                            <constraint firstItem="phr-6A-as4" firstAttribute="top" secondItem="hE4-Z2-h1k" secondAttribute="bottom" constant="20" id="90w-ll-aRh"/>
+                            <constraint firstItem="EZw-Bs-w9I" firstAttribute="top" secondItem="ssi-DN-43J" secondAttribute="bottom" constant="50" id="JRe-yu-ksK"/>
+                            <constraint firstItem="EZw-Bs-w9I" firstAttribute="top" secondItem="dYG-X2-xjd" secondAttribute="bottom" constant="90" id="OvO-6C-Xc9"/>
                             <constraint firstAttribute="centerX" secondItem="dYG-X2-xjd" secondAttribute="centerX" id="PSE-Tw-SPX"/>
-                            <constraint firstItem="phr-6A-as4" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" constant="30" id="Q6q-KG-yPD"/>
-                            <constraint firstItem="FhH-mU-SpQ" firstAttribute="top" secondItem="ssi-DN-43J" secondAttribute="bottom" constant="10" id="dMB-2y-aeP"/>
                             <constraint firstAttribute="centerX" secondItem="phr-6A-as4" secondAttribute="centerX" id="fhZ-fD-2xn"/>
-                            <constraint firstItem="ssi-DN-43J" firstAttribute="top" secondItem="dYG-X2-xjd" secondAttribute="bottom" constant="10" id="nJO-24-1r6"/>
+                            <constraint firstItem="EZw-Bs-w9I" firstAttribute="top" secondItem="FhH-mU-SpQ" secondAttribute="bottom" constant="30" id="rt6-wg-OuF"/>
+                            <constraint firstItem="EZw-Bs-w9I" firstAttribute="top" secondItem="rfo-pI-gOV" secondAttribute="bottom" constant="70" id="vPY-DF-AyL"/>
+                            <constraint firstAttribute="centerX" secondItem="rfo-pI-gOV" secondAttribute="centerX" id="w5v-sF-sh3"/>
                         </constraints>
                     </view>
                 </viewController>
