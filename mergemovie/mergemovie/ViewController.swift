@@ -43,6 +43,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     func playerDidPlayToEndTime(notification: NSNotification) {
         var duration = CMTimeGetSeconds(self.videoPlayer.currentItem.duration)
         clipEndTime = duration;
+        clipButton.setTitle("clip済", forState: .Normal)
         // 通知があったらnotificationを削除.
         startMovie()
     }
@@ -55,9 +56,12 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         self.movieSelct()
     }
     
-    /* clip end time */
+    @IBOutlet weak var clipButton: UIButton!
+    
+    /* clip start time */
     @IBAction func clipStart(sender: AnyObject) {
         if (videoPlayer.rate > 0) {
+            clipButton.setTitle("clip中", forState: .Normal)
             clipStartTime = CMTimeGetSeconds(self.videoPlayer.currentTime())
         }
     }
@@ -65,6 +69,7 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     /* clip end time */
     @IBAction func clipEnd(sender: AnyObject) {
         if (videoPlayer.rate > 0) {
+            clipButton.setTitle("clip済", forState: .Normal)
             clipEndTime = CMTimeGetSeconds(self.videoPlayer.currentTime())
         }
     }

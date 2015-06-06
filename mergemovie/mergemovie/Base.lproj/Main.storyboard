@@ -77,6 +77,9 @@
                             <constraint firstAttribute="centerX" secondItem="rfo-pI-gOV" secondAttribute="centerX" id="w5v-sF-sh3"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="clipButton" destination="dYG-X2-xjd" id="IPA-ns-RMX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
