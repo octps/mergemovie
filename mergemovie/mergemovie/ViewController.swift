@@ -16,8 +16,11 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     var videoPlayer : AVPlayer!
     var myLayer : AVPlayerLayer!
     
-    var clipStartTime:Float64!
-    var clipEndTime:Float64!
+//    var clipStartTime:Float64!
+//    var clipEndTime:Float64!
+
+        var clipStartTime:CMTime!
+        var clipEndTime:CMTime!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,13 +38,12 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
         myLayer.player = videoPlayer
         
         self.view.layer.addSublayer(myLayer)
-
-        
     }
     
     /* 動画終了時のメソッド */
     func playerDidPlayToEndTime(notification: NSNotification) {
-        var duration = CMTimeGetSeconds(self.videoPlayer.currentItem.duration)
+//        var duration = CMTimeGetSeconds(self.videoPlayer.currentItem.duration)
+        var duration = self.videoPlayer.currentItem.duration
         clipEndTime = duration;
         clipButton.setTitle("clip済", forState: .Normal)
         // 通知があったらnotificationを削除.
@@ -62,7 +64,8 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     @IBAction func clipStart(sender: AnyObject) {
         if (videoPlayer.rate > 0) {
             clipButton.setTitle("clip中", forState: .Normal)
-            clipStartTime = CMTimeGetSeconds(self.videoPlayer.currentTime())
+//            clipStartTime = CMTimeGetSeconds(self.videoPlayer.currentTime())
+            clipStartTime = self.videoPlayer.currentTime()
         }
     }
 
@@ -70,11 +73,20 @@ class ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigat
     @IBAction func clipEnd(sender: AnyObject) {
         if (videoPlayer.rate > 0) {
             clipButton.setTitle("clip済", forState: .Normal)
-            clipEndTime = CMTimeGetSeconds(self.videoPlayer.currentTime())
+//            clipEndTime = CMTimeGetSeconds(self.videoPlayer.currentTime())
+            clipEndTime = self.videoPlayer.currentTime()
         }
     }
-    
 
+    @IBAction func clipPlayButton(sender: AnyObject) {
+        clipPlay()
+    }
+
+    func clipPlay() {
+//        self.videoPlayer.seekToTime(clipStartTime, toleranceBefore:kCMTimeZero, toleranceAfter:kCMTimeZero)
+        self.videoPlayer.seekToTime(clipStartTime)
+    }
+    
     //　カメラロールから動画の選択
     func movieSelct() {
         if !UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) {

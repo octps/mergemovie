@@ -62,6 +62,15 @@
                                     <action selector="playMovie:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="MDL-2e-fiu"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q2B-tV-eQJ">
+                                <rect key="frame" x="273" y="450" width="54" height="30"/>
+                                <state key="normal" title="clipPlay">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="clipPlayButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="3rZ-po-Wl7"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -71,6 +80,8 @@
                             <constraint firstItem="EZw-Bs-w9I" firstAttribute="top" secondItem="ssi-DN-43J" secondAttribute="bottom" constant="50" id="JRe-yu-ksK"/>
                             <constraint firstItem="EZw-Bs-w9I" firstAttribute="top" secondItem="dYG-X2-xjd" secondAttribute="bottom" constant="90" id="OvO-6C-Xc9"/>
                             <constraint firstAttribute="centerX" secondItem="dYG-X2-xjd" secondAttribute="centerX" id="PSE-Tw-SPX"/>
+                            <constraint firstAttribute="centerX" secondItem="Q2B-tV-eQJ" secondAttribute="centerX" id="VKg-3u-Zib"/>
+                            <constraint firstItem="rfo-pI-gOV" firstAttribute="top" secondItem="Q2B-tV-eQJ" secondAttribute="bottom" constant="20" id="dMY-up-QIc"/>
                             <constraint firstAttribute="centerX" secondItem="phr-6A-as4" secondAttribute="centerX" id="fhZ-fD-2xn"/>
                             <constraint firstItem="EZw-Bs-w9I" firstAttribute="top" secondItem="FhH-mU-SpQ" secondAttribute="bottom" constant="30" id="rt6-wg-OuF"/>
                             <constraint firstItem="EZw-Bs-w9I" firstAttribute="top" secondItem="rfo-pI-gOV" secondAttribute="bottom" constant="70" id="vPY-DF-AyL"/>
